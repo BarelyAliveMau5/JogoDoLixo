@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 public class Assets
 {
 	public static Texture gramado;
+	public static Texture fundoMenuPrincipal;
+	
+	
 	public static Texture carregarTextura(String textura)
 	{
 		return new Texture(Gdx.files.internal(textura));
@@ -14,5 +17,6 @@ public class Assets
 	public static void carregarTudo()
 	{
 		gramado = carregarTextura("gramado.png");
+		fundoMenuPrincipal = carregarTextura("fundo_menu.png");
 	}
 }
