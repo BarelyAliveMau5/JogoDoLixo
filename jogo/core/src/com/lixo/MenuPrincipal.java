@@ -11,8 +11,9 @@ public class MenuPrincipal extends ScreenAdapter
 {	
 	Lixo jogo;
 	OrthographicCamera camera;
-	Rectangle btnArea_Jogar;  //120x40
-	Rectangle btnArea_Som;  //16x16
+	Rectangle rectJogar;  //120x40
+	Rectangle rectAjuda;  //120x40
+	Rectangle rectSom;  //16x16
 	Vector3 areaDoClick;
 	
 	public MenuPrincipal (Lixo jogo)
@@ -20,8 +21,9 @@ public class MenuPrincipal extends ScreenAdapter
 		this.jogo = jogo;
 		camera = new OrthographicCamera(Assets.TELA_LARGURA, Assets.TELA_ALTURA);
 		camera.position.set(Assets.TELA_LARGURA / 2, Assets.TELA_ALTURA / 2, 0);
-		btnArea_Jogar = new Rectangle(Assets.TELA_LARGURA/2 - 60, Assets.TELA_ALTURA/2 - 20, 120, 40);
-		btnArea_Som = new Rectangle(Assets.TELA_LARGURA -16, Assets.TELA_ALTURA -16, 16, 16);
+		rectJogar = new Rectangle(Assets.TELA_LARGURA/2 - 60, Assets.TELA_ALTURA/2 - 20, 120, 40);
+		rectAjuda = new Rectangle(Assets.TELA_LARGURA/2 - 60, Assets.TELA_ALTURA/2 - 60, 120, 40);
+		rectSom = new Rectangle(Assets.TELA_LARGURA -16, Assets.TELA_ALTURA -16, 16, 16);
 		areaDoClick = new Vector3();
 	}
 	
@@ -31,10 +33,16 @@ public class MenuPrincipal extends ScreenAdapter
 		if(Gdx.input.justTouched()) 
 		{
 			camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-			if(btnArea_Jogar.contains(areaDoClick.x, areaDoClick.y))
+			
+			if(rectJogar.contains(areaDoClick.x, areaDoClick.y))
 				jogo.setScreen(new TelaJogo(jogo));
-			if(btnArea_Som.contains(areaDoClick.x, areaDoClick.y))
+			
+			if(rectAjuda.contains(areaDoClick.x, areaDoClick.y))
+			    jogo.setScreen(new TelaAjuda(jogo));
+			
+			if(rectSom.contains(areaDoClick.x, areaDoClick.y))
 				Assets.alternarSomOnOff();
+			System.out.println(areaDoClick.x + " "+ areaDoClick.y);
 		}
 	}
 	
@@ -49,7 +57,8 @@ public class MenuPrincipal extends ScreenAdapter
 		jogo.batch.enableBlending();
 		jogo.batch.begin();
 		jogo.batch.draw(Assets.fundoMenuPrincipal, 0, 0, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
-		jogo.batch.draw(Assets.texto_iniciar, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA/2-20);
+		jogo.batch.draw(Assets.txt_iniciar, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA/2-20);
+		jogo.batch.draw(Assets.txt_ajuda, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA/2-60);
 		jogo.batch.draw(Assets.titulo, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA - 100);
 		jogo.batch.draw(Assets.getSomSprite(), Assets.TELA_LARGURA-16, Assets.TELA_ALTURA-16);
 		jogo.batch.end();
