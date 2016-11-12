@@ -31,6 +31,7 @@ public class MenuPrincipal extends ScreenAdapter
 		areaDoClick = new Vector3();
 	}
 	
+	//verifica se foi um click em um dos botoes
 	public void atualizar()
 	{
 		//funciona com o click do mouse. na verdade não existe um evento de click '-'
