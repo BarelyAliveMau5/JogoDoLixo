@@ -38,9 +38,9 @@ public class TelaJogo extends ScreenAdapter
         jogo.batch.begin();
         jogo.batch.draw(Assets.fundoJogo, 0, 160, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
         jogo.batch.draw(Assets.gramado, 0, 0, Assets.TELA_LARGURA, 200);
-        for (int k=0; k<6; k++)
+        for (int k=0; k<4; k++)
             for (int j=0; j<10; j++)
-                jogo.batch.draw(Assets.grama.getKeyFrame((delta+j+k*3),true),-50+j*70+k*10,-20+30*k,80,80);
+                jogo.batch.draw(Assets.grama.getKeyFrame((delta+j+k*3),true),-50+j*70+k*10,40+30*k,80,80);
         jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.05f-10,Assets.TELA_ALTURA * 0.1f-10,120,40);
         jogo.batch.draw(Assets.estilingue_tras, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f);
         jogo.batch.draw(Assets.estilingue_frente, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f + 130 - 57);
@@ -52,6 +52,9 @@ public class TelaJogo extends ScreenAdapter
         jogo.batch.draw(Assets.lixeira_azul, Assets.TELA_LARGURA * 0.66f - 50, Assets.TELA_ALTURA * 0.1f);
         jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.54f - 75,Assets.TELA_ALTURA * 0.1f-10,140,40);
         jogo.batch.draw(Assets.lixeira_amarela, Assets.TELA_LARGURA * 0.54f - 50, Assets.TELA_ALTURA * 0.1f);
+        for (int k=0; k<2; k++)
+            for (int j=0; j<10; j++)
+                jogo.batch.draw(Assets.grama.getKeyFrame((delta+j+k*3),true),-50+j*70+k*10,-20+30*k,80,80);
         jogo.batch.end();
 	}
 	
