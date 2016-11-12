@@ -18,6 +18,7 @@ public class MenuPrincipal extends ScreenAdapter
 	Rectangle rectJogar;  //120x40
 	Rectangle rectAjuda;  //120x40
 	Rectangle rectSom;  //16x16
+	Rectangle rectMusica;  //16x16
 	Vector3 areaDoClick;
 	
 	public MenuPrincipal (Lixo jogo)
@@ -28,6 +29,7 @@ public class MenuPrincipal extends ScreenAdapter
 		rectJogar = new Rectangle(Assets.TELA_LARGURA/2 - 60, Assets.TELA_ALTURA/2 - 20, 120, 40);
 		rectAjuda = new Rectangle(Assets.TELA_LARGURA/2 - 60, Assets.TELA_ALTURA/2 - 60, 120, 40);
 		rectSom = new Rectangle(Assets.TELA_LARGURA -16, Assets.TELA_ALTURA -16, 16, 16);
+		rectMusica = new Rectangle(Assets.TELA_LARGURA -32, Assets.TELA_ALTURA -16, 16, 16);
 		areaDoClick = new Vector3();
 	}
 	
@@ -42,17 +44,26 @@ public class MenuPrincipal extends ScreenAdapter
 			if(rectJogar.contains(areaDoClick.x, areaDoClick.y))
 			{
 				jogo.setScreen(new TelaJogo(jogo));
-				Assets.botao_click.play();
+                Assets.tocarSom(Assets.botao_click);
 			}
 			
 			if(rectAjuda.contains(areaDoClick.x, areaDoClick.y))
 			{
 			    jogo.setScreen(new TelaAjuda(jogo));
-			    Assets.botao_click.play();
+			    Assets.tocarSom(Assets.botao_click);
 			}
 			
 			if(rectSom.contains(areaDoClick.x, areaDoClick.y))
-				Assets.alternarSomOnOff();
+			{
+			    Assets.alternarSomOnOff();
+			    Assets.tocarSom(Assets.botao_click);
+            }
+			
+			if(rectMusica.contains(areaDoClick.x, areaDoClick.y))
+			{
+				Assets.alternarMusicaOnOff();
+                Assets.tocarSom(Assets.botao_click);
+			}
 		}
 	}
 	
@@ -70,7 +81,8 @@ public class MenuPrincipal extends ScreenAdapter
 		jogo.batch.draw(Assets.txt_iniciar, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA/2-20);
 		jogo.batch.draw(Assets.txt_ajuda, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA/2-60);
 		jogo.batch.draw(Assets.titulo, Assets.TELA_LARGURA/2-60, Assets.TELA_ALTURA - 100);
-		jogo.batch.draw(Assets.getSomSprite(), Assets.TELA_LARGURA-16, Assets.TELA_ALTURA-16);
+		jogo.batch.draw(Assets.getSomTextureRegion(), Assets.TELA_LARGURA-16, Assets.TELA_ALTURA-16);
+		jogo.batch.draw(Assets.getMusicaTextureRegion(), Assets.TELA_LARGURA-32, Assets.TELA_ALTURA-16);
 		jogo.batch.end();
 	}
 	
