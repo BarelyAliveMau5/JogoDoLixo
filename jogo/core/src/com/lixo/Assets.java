@@ -34,6 +34,7 @@ public class Assets
     public static Animation grama;
     public static Music musica;
     public static Sound botao_click;
+    public static Sound faustao;
     static TextureRegion musica_ligada;
     static TextureRegion som_ligado;
     static TextureRegion musica_desligada;
@@ -81,6 +82,7 @@ public class Assets
         musica.setVolume(0.5f);
         if (tocar_musica) musica.play();
         botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
+        faustao = Gdx.audio.newSound(Gdx.files.internal("errou.mp3"));
         sprites = carregarTextura("sprites.png");
         lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
         lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);
