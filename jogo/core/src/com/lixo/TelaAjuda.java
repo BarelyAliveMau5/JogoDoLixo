@@ -30,8 +30,10 @@ public class TelaAjuda extends ScreenAdapter
             camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if(rectVoltar.contains(areaDoClick.x, areaDoClick.y))
+            {
                 jogo.setScreen(new MenuPrincipal(jogo));
-            System.out.println(areaDoClick.x + " "+ areaDoClick.y);
+                Assets.botao_click.play();
+            }
         }
     }
     
@@ -44,6 +46,7 @@ public class TelaAjuda extends ScreenAdapter
         jogo.batch.setProjectionMatrix(camera.combined);
         
         jogo.batch.begin();
+        jogo.batch.draw(Assets.fundoMenuPrincipal, 0, 0, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
         jogo.batch.draw(Assets.txt_voltar, 10, 10);
         jogo.batch.end();
     }

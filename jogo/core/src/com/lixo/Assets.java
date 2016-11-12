@@ -2,6 +2,7 @@ package com.lixo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,14 +20,15 @@ public class Assets
     public static TextureRegion txt_voltar;
     public static TextureRegion btn_pausar;
     public static TextureRegion titulo;
-    static TextureRegion som_ligado;
-    static TextureRegion som_desligado;
     public static TextureRegion garrafa_heineken;
     public static Texture gramado;
     public static Texture sprites;
-    public static Animation grama;
     public static Texture fundoMenuPrincipal;
+    public static Animation grama;
     public static Music musica;
+    public static Sound botao_click;
+    static TextureRegion som_ligado;
+    static TextureRegion som_desligado;
     static boolean sons;
     public static final int TELA_LARGURA = 640;
     public static final int TELA_ALTURA = 480;
@@ -53,6 +55,7 @@ public class Assets
         musica.setLooping(true);
         musica.setVolume(0.5f);
         musica.play();
+        botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
         sprites = carregarTextura("sprites.png");
         lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
         lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);

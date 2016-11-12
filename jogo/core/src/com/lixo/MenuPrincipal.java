@@ -35,14 +35,19 @@ public class MenuPrincipal extends ScreenAdapter
 			camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 			
 			if(rectJogar.contains(areaDoClick.x, areaDoClick.y))
+			{
 				jogo.setScreen(new TelaJogo(jogo));
+				Assets.botao_click.play();
+			}
 			
 			if(rectAjuda.contains(areaDoClick.x, areaDoClick.y))
+			{
 			    jogo.setScreen(new TelaAjuda(jogo));
+			    Assets.botao_click.play();
+			}
 			
 			if(rectSom.contains(areaDoClick.x, areaDoClick.y))
 				Assets.alternarSomOnOff();
-			System.out.println(areaDoClick.x + " "+ areaDoClick.y);
 		}
 	}
 	
