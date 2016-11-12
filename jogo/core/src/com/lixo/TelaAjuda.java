@@ -1,3 +1,7 @@
+/*************************************************
+ * o nome ja diz..
+ *************************************************/
+
 package com.lixo;
 
 import com.badlogic.gdx.Gdx;
@@ -44,10 +48,11 @@ public class TelaAjuda extends ScreenAdapter
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         jogo.batch.setProjectionMatrix(camera.combined);
-        
         jogo.batch.begin();
         jogo.batch.draw(Assets.fundoMenuPrincipal, 0, 0, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
         jogo.batch.draw(Assets.txt_voltar, 10, 10);
+        jogo.batch.draw(Assets.titulo_ajuda, Assets.TELA_LARGURA/2-76, Assets.TELA_ALTURA - 100);
+        jogo.fonte.draw(jogo.batch, "Ajuste o ângulo e força do estilingue\npara acertar o objeto na lixeira certa", (float) (Assets.TELA_LARGURA * 0.1), (float) (Assets.TELA_ALTURA - Assets.TELA_ALTURA * 0.25));
         jogo.batch.end();
     }
     

@@ -1,3 +1,7 @@
+/*************************************************
+ * imagens e sons do jogo
+ *************************************************/
+
 package com.lixo;
 
 import com.badlogic.gdx.Gdx;
@@ -20,6 +24,7 @@ public class Assets
     public static TextureRegion txt_voltar;
     public static TextureRegion btn_pausar;
     public static TextureRegion titulo;
+    public static TextureRegion titulo_ajuda;
     public static TextureRegion garrafa_heineken;
     public static Texture gramado;
     public static Texture sprites;
@@ -48,13 +53,13 @@ public class Assets
 
     public static void carregarTudo()
     {
-        sons = true;
+        sons = false; //mudar na dist
         gramado = carregarTextura("gramado.png");
         fundoMenuPrincipal = carregarTextura("fundo_menu.png");
         musica = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
         musica.setLooping(true);
         musica.setVolume(0.5f);
-        musica.play();
+        if (sons) musica.play();
         botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
         sprites = carregarTextura("sprites.png");
         lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
@@ -68,6 +73,7 @@ public class Assets
         txt_ajuda = new TextureRegion(sprites, 320, 40, 120, 40);
         txt_voltar = new TextureRegion(sprites, 320, 80, 120, 40);
         titulo = new TextureRegion(sprites, 100, 157, 128, 70);
+        titulo_ajuda = new TextureRegion(sprites, 228, 170, 152, 64);
         som_ligado = new TextureRegion(sprites, 180, 140, 16, 16);
         som_desligado = new TextureRegion(sprites, 196, 140, 16, 16);
         btn_pausar = new TextureRegion(sprites, 212, 140, 16, 16);
