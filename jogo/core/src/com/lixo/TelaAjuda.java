@@ -72,4 +72,5 @@ public class TelaAjuda extends ScreenAdapter
         atualizar();
         desenhar();
     }
+    
 }
