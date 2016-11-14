@@ -22,10 +22,13 @@ public class Assets
     public static TextureRegion txt_iniciar;
     public static TextureRegion txt_ajuda;
     public static TextureRegion txt_voltar;
-    public static TextureRegion btn_pausar;
+    public static TextureRegion btn_sair;
     public static TextureRegion titulo;
     public static TextureRegion titulo_ajuda;
-    public static TextureRegion garrafa_heineken;
+    public static TextureRegion vidro_heineken;
+    public static TextureRegion plastico_shake;
+    public static TextureRegion metal_iphone;
+    public static TextureRegion papel_aps;
     public static TextureRegion sombra;
     public static Texture gramado;
     public static Texture sprites;
@@ -33,8 +36,9 @@ public class Assets
     public static Texture fundoJogo;
     public static Animation grama;
     public static Music musica;
-    public static Sound botao_click;
-    public static Sound faustao;
+    public static Sound som_botao_click;
+    public static Sound som_faustao;
+    public static Sound som_lancar;
     static TextureRegion musica_ligada;
     static TextureRegion som_ligado;
     static TextureRegion musica_desligada;
@@ -44,7 +48,52 @@ public class Assets
     public static final int TELA_LARGURA = 640;
     public static final int TELA_ALTURA = 480;
 
-    public static Texture carregarTextura(String textura)
+    public static void carregarTudo()
+    {
+        tocar_musica = false; //mudar na dist
+        tocar_sons = true;
+        gramado = carregarTextura("gramado.png");
+        fundoMenuPrincipal = carregarTextura("fundo_menu.png");
+        fundoJogo = carregarTextura("fundo.png");
+        musica = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        musica.setLooping(true);
+        musica.setVolume(0.5f);
+        if (tocar_musica) musica.play();
+        som_botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
+        som_faustao = Gdx.audio.newSound(Gdx.files.internal("errou.mp3"));
+        som_lancar = Gdx.audio.newSound(Gdx.files.internal("whip.wav"));
+        sprites = carregarTextura("sprites.png");
+        lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
+        lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);
+        lixeira_amarela = new TextureRegion(sprites, 160, 0, 80, 100);
+        lixeira_azul = new TextureRegion(sprites, 240, 0, 80, 100);
+        estilingue_tras = new TextureRegion(sprites, 0, 100, 100, 130);
+        estilingue_frente = new TextureRegion(sprites, 100, 100, 48, 57);
+        vidro_heineken = new TextureRegion(sprites, 180, 100, 32, 48);
+        plastico_shake = new TextureRegion(sprites, 212, 100, 32, 48);
+        metal_iphone = new TextureRegion(sprites, 244, 100, 32, 48);
+        papel_aps = new TextureRegion(sprites, 276, 100, 32, 48);
+        txt_iniciar = new TextureRegion(sprites, 320, 0, 120, 40);
+        txt_ajuda = new TextureRegion(sprites, 320, 40, 120, 40);
+        txt_voltar = new TextureRegion(sprites, 320, 80, 120, 40);
+        titulo = new TextureRegion(sprites, 100, 157, 128, 70);
+        titulo_ajuda = new TextureRegion(sprites, 228, 170, 152, 64);
+        sombra = new TextureRegion(sprites, 380, 170, 60, 51);
+        musica_ligada = new TextureRegion(sprites, 148, 116, 16, 16);
+        musica_desligada = new TextureRegion(sprites, 164, 116, 16, 16);
+        som_ligado = new TextureRegion(sprites, 148, 100, 16, 16);
+        som_desligado = new TextureRegion(sprites, 164, 100, 16, 16);
+        btn_sair = new TextureRegion(sprites, 132, 148, 16, 16);
+        TextureRegion[] frames = new TextureRegion(new Texture("grass.png")).split(80, 120)[0];
+        grama = new Animation(0.33f, 
+                frames[0],  frames[1],  frames[2],  frames[3],  frames[4], 
+                frames[5],  frames[6],  frames[7],  frames[8],  frames[9], 
+                frames[10], frames[11], frames[12], frames[13], frames[14], 
+                frames[15], frames[16], frames[17], frames[18], frames[19], 
+                frames[20], frames[21], frames[22], frames[23] ,frames[24]); 
+    }
+    
+    static Texture carregarTextura(String textura)
     {
         return new Texture(Gdx.files.internal(textura));
     }
@@ -68,47 +117,6 @@ public class Assets
             return som_ligado;
         else
             return som_desligado;
-    }
-
-    public static void carregarTudo()
-    {
-        tocar_musica = false; //mudar na dist
-        tocar_sons = true;
-        gramado = carregarTextura("gramado.png");
-        fundoMenuPrincipal = carregarTextura("fundo_menu.png");
-        fundoJogo = carregarTextura("fundo.png");
-        musica = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
-        musica.setLooping(true);
-        musica.setVolume(0.5f);
-        if (tocar_musica) musica.play();
-        botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
-        faustao = Gdx.audio.newSound(Gdx.files.internal("errou.mp3"));
-        sprites = carregarTextura("sprites.png");
-        lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
-        lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);
-        lixeira_amarela = new TextureRegion(sprites, 160, 0, 80, 100);
-        lixeira_azul = new TextureRegion(sprites, 240, 0, 80, 100);
-        estilingue_tras = new TextureRegion(sprites, 0, 100, 100, 130);
-        estilingue_frente = new TextureRegion(sprites, 100, 100, 48, 57);
-        garrafa_heineken = new TextureRegion(sprites, 148, 100, 32, 48);
-        txt_iniciar = new TextureRegion(sprites, 320, 0, 120, 40);
-        txt_ajuda = new TextureRegion(sprites, 320, 40, 120, 40);
-        txt_voltar = new TextureRegion(sprites, 320, 80, 120, 40);
-        titulo = new TextureRegion(sprites, 100, 157, 128, 70);
-        titulo_ajuda = new TextureRegion(sprites, 228, 170, 152, 64);
-        sombra = new TextureRegion(sprites, 260, 120, 60, 51);
-        musica_ligada = new TextureRegion(sprites, 228, 140, 16, 16);
-        musica_desligada = new TextureRegion(sprites, 244, 140, 16, 16);
-        som_ligado = new TextureRegion(sprites, 180, 140, 16, 16);
-        som_desligado = new TextureRegion(sprites, 196, 140, 16, 16);
-        btn_pausar = new TextureRegion(sprites, 212, 140, 16, 16);
-        TextureRegion[] frames = new TextureRegion(new Texture("grass.png")).split(80, 120)[0];
-        grama = new Animation(0.33f, 
-                frames[0],  frames[1],  frames[2],  frames[3],  frames[4], 
-                frames[5],  frames[6],  frames[7],  frames[8],  frames[9], 
-                frames[10], frames[11], frames[12], frames[13], frames[14], 
-                frames[15], frames[16], frames[17], frames[18], frames[19], 
-                frames[20], frames[21], frames[22], frames[23] ,frames[24]); 
     }
 
     // odeio nomes gigantes. não sou javeiro então foda-se
