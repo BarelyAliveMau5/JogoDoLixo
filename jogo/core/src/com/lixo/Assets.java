@@ -45,11 +45,13 @@ public class Assets
     static TextureRegion som_desligado;
     static boolean tocar_sons;
     static boolean tocar_musica;
+    public static boolean debug;
     public static final int TELA_LARGURA = 640;
     public static final int TELA_ALTURA = 480;
 
     public static void carregarTudo()
     {
+        debug = true;
         tocar_musica = false; //mudar na dist
         tocar_sons = true;
         gramado = carregarTextura("gramado.png");

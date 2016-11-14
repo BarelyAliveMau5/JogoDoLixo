@@ -85,8 +85,9 @@ public class Projetil
         atualizar(delta);
         if (!ativo)
         {
-            batch.draw(getTipoSprite(tipo), posicao.x, posicao.y);
-            rotacao = 0;
+            batch.draw(getTipoSprite(tipo), posicao.x, posicao.y,
+                    area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao);
+            
         }
         else 
         {
@@ -98,7 +99,7 @@ public class Projetil
     public void desativar()
     {
         ativo = false;
-        tipo = Tipo.INVISIVEL;
+        //tipo = Tipo.INVISIVEL;
     }
     
 }
