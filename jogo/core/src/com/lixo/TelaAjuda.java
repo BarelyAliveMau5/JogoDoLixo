@@ -36,7 +36,7 @@ public class TelaAjuda extends ScreenAdapter
             if(rectVoltar.contains(areaDoClick.x, areaDoClick.y))
             {
                 jogo.setScreen(new MenuPrincipal(jogo));
-                Assets.tocarSom(Assets.botao_click);
+                Assets.tocarSom(Assets.som_botao_click);
             }
         }
     }

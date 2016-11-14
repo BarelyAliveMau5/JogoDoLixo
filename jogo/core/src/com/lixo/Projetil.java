@@ -12,66 +12,60 @@ public class Projetil
         PLASTICO,
         VIDRO,
         PAPEL,
-        METAL
+        METAL,
+        INVISIVEL
     }
     
-    public static enum Estado
-    {
-        PARADO,
-        LANCADO
-    }
     
-    TextureRegion sprite;
     public Vector2 posicao;
     public Vector2 velocidade;
-    public Estado estado;
+    boolean ativo;
     public Rectangle area;
     float rotacao;
-    Mundo mundo;
+    Tipo tipo;
     
-    public Projetil(Tipo tipo, Mundo mundo, float x, float y)
+    public Projetil(Tipo tipo, float x, float y)
     {
         this.posicao = new Vector2(x, y);
-        this.mundo = mundo;
+        this.tipo = tipo;
         velocidade = new Vector2();
-        estado = Estado.PARADO;
+        ativo = false;
         rotacao = 0;
+        //todos tem o mesmo tamanho
+        area = new Rectangle(x, y, 32f, 48f);
+    }
+    
+    TextureRegion getTipoSprite(Tipo tipo)
+    {
         switch (tipo)
         {
         case PLASTICO:
-            sprite = Assets.garrafa_heineken;
-            area = new Rectangle(x, y, 32f, 48f);
-            break;
+            return Assets.plastico_shake;
             
         case VIDRO:
-
-            area = new Rectangle();
-            break;
+            return Assets.vidro_heineken;
             
         case PAPEL:
-
-            area = new Rectangle();
-            break;
+            return Assets.papel_aps;
             
         case METAL:
-
-            area = new Rectangle();
-            break;
+            return Assets.metal_iphone;
             
         default:
-            throw new IllegalArgumentException("Projetil de tipo invalido");
+            throw new IllegalArgumentException();
         }
     }
     
     public void lancar(Vector2 aceleracao)
     {
         velocidade.add(aceleracao);
-        estado = Estado.LANCADO;
+        ativo = true;
+        Assets.tocarSom(Assets.som_lancar);
     }
     
     public void atualizar(float tempo_delta)
     {
-        if (estado == Estado.LANCADO) 
+        if (ativo) 
         {
             velocidade.add(tempo_delta * Mundo.gravidade.x, 
                            tempo_delta * Mundo.gravidade.y); 
@@ -86,16 +80,25 @@ public class Projetil
     
     public void desenhar(Batch batch, float delta)
     {
+        if (tipo == Tipo.INVISIVEL) 
+            return;
         atualizar(delta);
-        if (estado == Estado.PARADO)
+        if (!ativo)
         {
-            batch.draw(sprite, posicao.x, posicao.y);
+            batch.draw(getTipoSprite(tipo), posicao.x, posicao.y);
             rotacao = 0;
         }
         else 
         {
-            batch.draw(sprite, posicao.x, posicao.y, 
-                    area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao-=6);
+            batch.draw(getTipoSprite(tipo), posicao.x, posicao.y, 
+                    area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao-=-velocidade.x);
         }
     }
+    
+    public void desativar()
+    {
+        ativo = false;
+        tipo = Tipo.INVISIVEL;
+    }
+    
 }
