@@ -44,25 +44,25 @@ public class MenuPrincipal extends ScreenAdapter
 			if(rectJogar.contains(areaDoClick.x, areaDoClick.y))
 			{
 				jogo.setScreen(new TelaJogo(jogo));
-                Assets.tocarSom(Assets.botao_click);
+                Assets.tocarSom(Assets.som_botao_click);
 			}
 			
 			if(rectAjuda.contains(areaDoClick.x, areaDoClick.y))
 			{
 			    jogo.setScreen(new TelaAjuda(jogo));
-			    Assets.tocarSom(Assets.botao_click);
+			    Assets.tocarSom(Assets.som_botao_click);
 			}
 			
 			if(rectSom.contains(areaDoClick.x, areaDoClick.y))
 			{
 			    Assets.alternarSomOnOff();
-			    Assets.tocarSom(Assets.botao_click);
+			    Assets.tocarSom(Assets.som_botao_click);
             }
 			
 			if(rectMusica.contains(areaDoClick.x, areaDoClick.y))
 			{
 				Assets.alternarMusicaOnOff();
-                Assets.tocarSom(Assets.botao_click);
+                Assets.tocarSom(Assets.som_botao_click);
 			}
 		}
 	}
