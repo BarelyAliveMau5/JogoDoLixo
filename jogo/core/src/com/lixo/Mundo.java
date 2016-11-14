@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Mundo
 {
-    public static Vector2 gravidade = new Vector2(0, -12f);
+    public static final Vector2 gravidade = new Vector2(-1f, -30f);
     Rectangle limite_chao;
     Rectangle limite_parede;
     
