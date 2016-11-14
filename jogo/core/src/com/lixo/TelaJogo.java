@@ -5,13 +5,17 @@
 package com.lixo;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.lixo.Projetil.Tipo;
+
+import sun.net.www.content.text.PlainTextInputStream;
 
 public class TelaJogo extends ScreenAdapter
 {
@@ -21,11 +25,14 @@ public class TelaJogo extends ScreenAdapter
 	Rectangle rectSom;  //16x16
 	Rectangle rectMusica;  //16x16
 	Rectangle rectSair;  //16x16
-	Projetil teste;
+	Vector3 areaDoClick;
 	Array<Projetil> projeteis;
 	int chances;
 	Mundo mundo;
 	float tempo_delta;
+	
+	Projetil teste;
+	Vector2 aceleracao;
 	
 	public TelaJogo(Lixo jogo)
 	{
@@ -33,14 +40,48 @@ public class TelaJogo extends ScreenAdapter
 		camera = new OrthographicCamera(Assets.TELA_LARGURA, Assets.TELA_ALTURA);
 		camera.position.set(Assets.TELA_LARGURA / 2, Assets.TELA_ALTURA / 2, 0);
 		mundo = new Mundo();
+		areaDoClick = new Vector3();
 		teste = new Projetil(Tipo.PLASTICO, Assets.TELA_LARGURA * 0.05f,Assets.TELA_ALTURA * 0.2f);
-		teste.lancar(new Vector2(4f,7f));
+		aceleracao = new Vector2(1f,1f);
 		chances = 5;
 	}
 	
 	public void atualizar()
 	{
 	    mundo.checarLimites(teste);
+	    if(Gdx.input.justTouched()) 
+        {
+	        camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+	        teste.velocidade.x = 0;
+	        teste.velocidade.y = 0;
+	        teste.posicao.x = areaDoClick.x;
+	        teste.posicao.y = areaDoClick.y;
+	        teste.tipo = Tipo.METAL;
+	        teste.lancar(aceleracao);
+	        
+        }
+	    
+	    //opções para debugging. divirta-se vendo o iphone ser lançado no lixo
+	    if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+	        aceleracao.x += 0.1f;
+	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	    }
+	    
+	    if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+	        aceleracao.x -= 0.1f;
+	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	    }
+	    
+	    if(Gdx.input.isKeyPressed(Keys.DOWN)){
+            aceleracao.y -= 0.1f;
+            System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	    }
+	    
+	    if(Gdx.input.isKeyPressed(Keys.UP)){
+	        aceleracao.y += 0.1f;
+	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	    }
+	    
 	}
 	
 	public void desenhar (float delta) 

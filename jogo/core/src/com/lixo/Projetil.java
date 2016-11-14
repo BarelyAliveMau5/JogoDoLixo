@@ -22,7 +22,7 @@ public class Projetil
     boolean ativo;
     public Rectangle area;
     float rotacao;
-    Tipo tipo;
+    public Tipo tipo;
     
     public Projetil(Tipo tipo, float x, float y)
     {
