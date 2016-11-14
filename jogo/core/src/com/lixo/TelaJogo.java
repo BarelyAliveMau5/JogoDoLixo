@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.lixo.Projetil.Tipo;
 
-import sun.net.www.content.text.PlainTextInputStream;
 
 public class TelaJogo extends ScreenAdapter
 {
@@ -64,22 +63,22 @@ public class TelaJogo extends ScreenAdapter
 	    //opções para debugging. divirta-se vendo o iphone ser lançado no lixo
 	    if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 	        aceleracao.x += 0.1f;
-	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	        System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
 	    }
 	    
 	    if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 	        aceleracao.x -= 0.1f;
-	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	        System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
 	    }
 	    
 	    if(Gdx.input.isKeyPressed(Keys.DOWN)){
             aceleracao.y -= 0.1f;
-            System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+            System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
 	    }
 	    
 	    if(Gdx.input.isKeyPressed(Keys.UP)){
 	        aceleracao.y += 0.1f;
-	        System.out.println("accel:" + aceleracao.x +"," + aceleracao.y);
+	        System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
 	    }
 	    
 	}

@@ -20,7 +20,7 @@ public class Mundo
         if (limite_chao.contains(projetil.posicao) || limite_parede.contains(projetil.posicao))
         {
             projetil.desativar();
-            System.out.println("gotcha "+projetil.posicao.x + ","+projetil.posicao.y);
+            System.out.println("gotcha x="+projetil.posicao.x + ", y="+projetil.posicao.y);
             projetil.posicao.set(-10,-10); // evitar que fique desativando sempre
         }
     }
