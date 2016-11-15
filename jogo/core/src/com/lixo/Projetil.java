@@ -19,9 +19,10 @@ public class Projetil
     
     public Vector2 posicao;
     public Vector2 velocidade;
+    public float accel;
     boolean ativo;
     public Rectangle area;
-    float rotacao;
+    public float rotacao;
     public Tipo tipo;
     
     public Projetil(Tipo tipo, float x, float y)
@@ -60,6 +61,7 @@ public class Projetil
     {
         velocidade.add(aceleracao);
         ativo = true;
+        accel = aceleracao.x;
         Assets.tocarSom(Assets.som_lancar);
     }
     
@@ -92,7 +94,7 @@ public class Projetil
         else 
         {
             batch.draw(getTipoSprite(tipo), posicao.x, posicao.y, 
-                    area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao-=-velocidade.x);
+                    area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao-=accel);
         }
     }
     

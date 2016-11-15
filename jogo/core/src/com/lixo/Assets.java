@@ -85,7 +85,7 @@ public class Assets
         musica_desligada = new TextureRegion(sprites, 164, 116, 16, 16);
         som_ligado = new TextureRegion(sprites, 148, 100, 16, 16);
         som_desligado = new TextureRegion(sprites, 164, 100, 16, 16);
-        btn_sair = new TextureRegion(sprites, 132, 148, 16, 16);
+        btn_sair = new TextureRegion(sprites, 148, 132, 16, 16);
         TextureRegion[] frames = new TextureRegion(new Texture("grass.png")).split(80, 120)[0];
         grama = new Animation(0.33f, 
                 frames[0],  frames[1],  frames[2],  frames[3],  frames[4], 
