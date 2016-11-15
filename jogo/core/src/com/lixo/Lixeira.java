@@ -20,11 +20,11 @@ public class Lixeira
     final Vector2 posicao;
     final Rectangle boca;
     
-    public Lixeira(Cor cor, float x, float y)
+    public Lixeira(Cor cor, Vector2 pos)
     {
-        posicao = new Vector2(x, y);
+        posicao = pos;
         this.cor = cor;
-        boca = new Rectangle(x+11, y+72, 58, 24);
+        boca = new Rectangle(pos.x+11, pos.y+72, 58, 24);
     }
     
     public boolean testarLixo(Vector2 posicao, Tipo tipo)
@@ -74,6 +74,7 @@ public class Lixeira
     
     public void desenhar(Batch batch)
     {
+        batch.draw(Assets.sombra,  posicao.x-32, posicao.y-16,140,40);
         batch.draw(getTextureRegionDaLixeira(cor), posicao.x, posicao.y);
     }
 }
