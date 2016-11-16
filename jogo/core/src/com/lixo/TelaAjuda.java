@@ -57,9 +57,13 @@ public class TelaAjuda extends ScreenAdapter
         jogo.fonte.draw(jogo.batch, "Tipos de lixeira:"
                 ,Assets.TELA_LARGURA * 0.1f, Assets.TELA_ALTURA - Assets.TELA_ALTURA * 0.45f);
         jogo.batch.draw(Assets.lixeira_vermelha, Assets.TELA_LARGURA * 0.2f - 50, Assets.TELA_ALTURA * 0.25f);
+        jogo.batch.draw(Assets.plastico_shake, Assets.TELA_LARGURA * 0.2f - 25, Assets.TELA_ALTURA * 0.25f + 70);
         jogo.batch.draw(Assets.lixeira_verde, Assets.TELA_LARGURA * 0.4f -50, Assets.TELA_ALTURA * 0.25f);
+        jogo.batch.draw(Assets.vidro_heineken, Assets.TELA_LARGURA * 0.4f - 25, Assets.TELA_ALTURA * 0.25f + 70);
         jogo.batch.draw(Assets.lixeira_azul, Assets.TELA_LARGURA * 0.6f -50, Assets.TELA_ALTURA * 0.25f);
+        jogo.batch.draw(Assets.papel_aps, Assets.TELA_LARGURA * 0.6f - 25, Assets.TELA_ALTURA * 0.25f + 70);
         jogo.batch.draw(Assets.lixeira_amarela, Assets.TELA_LARGURA * 0.8f -50, Assets.TELA_ALTURA * 0.25f);
+        jogo.batch.draw(Assets.metal_iphone, Assets.TELA_LARGURA * 0.8f - 25, Assets.TELA_ALTURA * 0.25f + 70);
         jogo.fonte.draw(jogo.batch, "Plastico", Assets.TELA_LARGURA *0.2f-60, Assets.TELA_ALTURA * 0.25f);
         jogo.fonte.draw(jogo.batch, "Vidro", Assets.TELA_LARGURA *0.4f-45, Assets.TELA_ALTURA * 0.25f);
         jogo.fonte.draw(jogo.batch, "Papel", Assets.TELA_LARGURA *0.6f-45, Assets.TELA_ALTURA * 0.25f);
