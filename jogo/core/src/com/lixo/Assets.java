@@ -38,6 +38,10 @@ public class Assets
     public static Music musica;
     public static Sound som_botao_click;
     public static Sound som_faustao;
+    public static Sound som_rude;
+    public static Sound som_vidro;
+    public static Sound som_lixo;
+    public static Sound som_soco;
     public static Sound som_lancar;
     static TextureRegion musica_ligada;
     static TextureRegion som_ligado;
@@ -45,14 +49,12 @@ public class Assets
     static TextureRegion som_desligado;
     static boolean tocar_sons;
     static boolean tocar_musica;
-    public static boolean debug;
     public static final int TELA_LARGURA = 640;
     public static final int TELA_ALTURA = 480;
 
     public static void carregarTudo()
     {
-        debug = true;
-        tocar_musica = false; //mudar na dist
+        tocar_musica = true; //mudar na dist
         tocar_sons = true;
         gramado = carregarTextura("gramado.png");
         fundoMenuPrincipal = carregarTextura("fundo_menu.png");
@@ -61,9 +63,13 @@ public class Assets
         musica.setLooping(true);
         musica.setVolume(0.5f);
         if (tocar_musica) musica.play();
-        som_botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.wav"));
-        som_faustao = Gdx.audio.newSound(Gdx.files.internal("errou.mp3"));
-        som_lancar = Gdx.audio.newSound(Gdx.files.internal("whip.wav"));
+        som_botao_click = Gdx.audio.newSound(Gdx.files.internal("botao_click.ogg"));
+        som_faustao = Gdx.audio.newSound(Gdx.files.internal("errou.ogg"));
+        som_rude = Gdx.audio.newSound(Gdx.files.internal("errou_rude.ogg"));
+        som_lancar = Gdx.audio.newSound(Gdx.files.internal("whip.ogg"));
+        som_vidro = Gdx.audio.newSound(Gdx.files.internal("glass.ogg"));
+        som_lixo= Gdx.audio.newSound(Gdx.files.internal("trash.ogg"));
+        som_soco= Gdx.audio.newSound(Gdx.files.internal("punch.ogg"));
         sprites = carregarTextura("sprites.png");
         lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
         lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);
@@ -134,5 +140,12 @@ public class Assets
     public static void alternarSomOnOff()
     {
         tocar_sons = !tocar_sons;
+        if (!tocar_sons)
+        {
+            //somente os sons mais longos
+            som_rude.stop();
+            som_faustao.stop();
+            som_vidro.stop();
+        }
     }
 }

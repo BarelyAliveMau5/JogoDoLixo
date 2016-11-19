@@ -16,7 +16,6 @@ public class Projetil
         INVISIVEL
     }
     
-    
     public Vector2 posicao;
     public Vector2 velocidade;
     public float accel;
@@ -53,7 +52,7 @@ public class Projetil
             return Assets.metal_iphone;
             
         default:
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(); //se cagar no codigo ele caga em vc
         }
     }
     
@@ -69,11 +68,10 @@ public class Projetil
     {
         if (ativo) 
         {
+            //posição e velocidades são relativas ao intervalo de tempo entre atualizações
             velocidade.add(tempo_delta * Mundo.gravidade.x, 
                            tempo_delta * Mundo.gravidade.y); 
-            
-            posicao.add(velocidade.x ,
-                        velocidade.y);
+            posicao.add(velocidade.x, velocidade.y);
         }
         
         area.x = posicao.x - area.width / 2;
@@ -86,22 +84,25 @@ public class Projetil
             return;
         atualizar(delta);
         if (!ativo)
-        {
+            //a quebra de linha mostra os parametros de rotação, não é separado do resto
+            //foi dividido pelo açucar sintático/estética do codigo
             batch.draw(getTipoSprite(tipo), posicao.x, posicao.y,
                     area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao);
-            
-        }
+
         else 
-        {
+            //btw se for um noob lendo: primeiro ele atribui a rotação com accel depois pega o valor
             batch.draw(getTipoSprite(tipo), posicao.x, posicao.y, 
                     area.width/2, area.height /2, area.width, area.height, 1, 1, rotacao-=accel);
-        }
+    }
+    
+    public void desaparecer()
+    {
+        tipo = Tipo.INVISIVEL;
     }
     
     public void desativar()
     {
         ativo = false;
-        //tipo = Tipo.INVISIVEL;
+        //tipo = Tipo.INVISIVEL;  //fica a criterio de quem quiser ver 
     }
-    
 }

@@ -16,6 +16,13 @@ public class Lixeira
         AMARELA
     }
     
+    public static enum TipoContato
+    {
+        ACERTOU,
+        ERROU,
+        SEM_CONTATO
+    }
+    
     public final Cor cor;
     final Vector2 posicao;
     final Rectangle boca;
@@ -24,10 +31,10 @@ public class Lixeira
     {
         posicao = pos;
         this.cor = cor;
-        boca = new Rectangle(pos.x+11, pos.y+72, 58, 24);
+        boca = new Rectangle(pos.x-10, pos.y+50, 58, 24);
     }
     
-    public boolean testarLixo(Vector2 posicao, Tipo tipo)
+    public TipoContato testarContatoLixo(Vector2 posicao, Tipo tipo)
     {
         if (boca.contains(posicao))
         {
@@ -35,25 +42,27 @@ public class Lixeira
             {
             case PLASTICO:
                 if (cor == Cor.VERMELHA)
-                    return true;
+                    return TipoContato.ACERTOU;
                 break;
             case METAL:
-                if (cor == Cor.AMARELA)
-                    return true;
+                if (cor == Cor.AMARELA){
+                    return TipoContato.ACERTOU; }
                 break;
             case PAPEL:
                 if (cor == Cor.AZUL)
-                    return true;
+                    return TipoContato.ACERTOU;
                 break;
             case VIDRO:
                 if (cor == Cor.VERDE)
-                    return true;
+                    return TipoContato.ACERTOU;
                 break;
             default:
-                return false;
+                return TipoContato.ERROU;
             }
+            return TipoContato.ERROU;
         }
-        return false;
+        else
+            return TipoContato.SEM_CONTATO;
     }
     
     TextureRegion getTextureRegionDaLixeira(Cor cor)

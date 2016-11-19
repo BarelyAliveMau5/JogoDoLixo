@@ -9,7 +9,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -18,36 +19,36 @@ import com.lixo.Projetil.Tipo;
 
 public class TelaJogo extends ScreenAdapter
 {
-
 	OrthographicCamera camera;
 	Lixo jogo;
 	BotaoSimples btnSom;
 	BotaoSimples btnMusica;
 	BotaoSimples btnSair;
 	Vector3 areaDoClick;
-	Array<Projetil> projeteis;
-	int chances;
 	Mundo mundo;
 	float tempo_delta;
+	private static ShapeRenderer desenhador = new ShapeRenderer();
 	
-	float teste_rot;
+	//somente usado em testes
+	Array<Projetil> projeteis;
 	Vector2 aceleracao;
 	Tipo teste_tipo;
 	
 	public TelaJogo(Lixo jogo)
 	{
+	    
 		this.jogo = jogo;
 		camera = new OrthographicCamera(Assets.TELA_LARGURA, Assets.TELA_ALTURA);
 		camera.position.set(Assets.TELA_LARGURA / 2, Assets.TELA_ALTURA / 2, 0);
-		mundo = new Mundo();
+		mundo = new Mundo(this.jogo);
 		btnSom = new BotaoSimples(Assets.getSomTextureRegion(), Assets.TELA_LARGURA -16, Assets.TELA_ALTURA -16, 16, 16);
 		btnMusica = new BotaoSimples(Assets.getMusicaTextureRegion(), Assets.TELA_LARGURA -32, Assets.TELA_ALTURA -16, 16, 16);
 		btnSair = new BotaoSimples(Assets.btn_sair, 0, Assets.TELA_ALTURA -16, 16, 16);
 		areaDoClick = new Vector3();
-		aceleracao = new Vector2(4f,7f);
-		projeteis = new Array<Projetil>();
-		chances = 5;
 		
+		//somente usado em testes
+		projeteis = new Array<Projetil>();
+		aceleracao = new Vector2(4f,7f);
 		teste_tipo = Tipo.METAL;
 	}
 	
@@ -124,19 +125,14 @@ public class TelaJogo extends ScreenAdapter
             }
         }
         
-        if(Gdx.input.isKeyPressed(Keys.Z)){
-            teste_rot -= 0.1f;
-            System.out.println("rotacao: " + teste_rot);
-        }
-        
-        if(Gdx.input.isKeyPressed(Keys.X)){
-            teste_rot += 0.1f;
-            System.out.println("rotacao: " + teste_rot);
-        }
-        
         if(Gdx.input.isKeyJustPressed(Keys.G)){
+            long javamem = Gdx.app.getJavaHeap()/1024;
             System.gc();
-            System.out.println("Garbage Collection");
+            System.out.println("Garbage collection\nJava heap:\t"+ javamem+"K -> " + (Gdx.app.getJavaHeap()/1024) + "K");
+        }
+        
+        if(Gdx.input.isKeyJustPressed(Keys.M)){
+            System.out.println("Java heap:\t" + (Gdx.app.getJavaHeap()/1024) + "K");
         }
         
         if(Gdx.input.isKeyPressed(Keys.UP)){
@@ -155,9 +151,12 @@ public class TelaJogo extends ScreenAdapter
         }
 	}
 	
+	
 	public void atualizar()
 	{
+	    //somente usado em testes
 	    mundo.checarLimites(projeteis);
+	    mundo.atualizar();
 	    if(Gdx.input.justTouched()) 
         {
 	        camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -183,22 +182,41 @@ public class TelaJogo extends ScreenAdapter
                 return;
             }
         }
-	    if (Assets.debug)
-	        testes_debug();
+	    //somente usado em testes
+	    testes_debug();
 	}
+	
 	
 	void desenhar_projeteis(float delta)
 	{
+	    //somente usado em testes
+	    ///*
 	    for(Projetil projetil : projeteis)
             projetil.desenhar(jogo.batch, delta);
+        //*/
 	}
 	
 	void desenhar_anim_grama(float delta, int y, int w, int h)
 	{
-	    //tempo_delta += delta*5;
 	    for (int k=0; k<h; k++)
             for (int j=0; j<w; j++)
                 jogo.batch.draw(Assets.grama.getKeyFrame((tempo_delta+j+k*3),true),-50+j*70+k*10,y+30*k,80,80);
+	}
+	
+	void desenhar_estilingue()
+	{
+	    jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.05f-10,Assets.TELA_ALTURA * 0.1f-10,120,40);
+        jogo.batch.draw(Assets.estilingue_tras, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f);
+        jogo.batch.draw(Assets.estilingue_frente, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f + 130 - 57);
+        
+	}
+	
+	void desenhar_textos()
+	{
+	    jogo.fonte.draw(jogo.batch, "Chances: " + mundo.logica_do_jogo.getChances(),Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
+	    jogo.fonte.draw(jogo.batch, "Restante: " + (mundo.logica_do_jogo.getRestante() + 1) ,Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 30);
+	    jogo.fonte.draw(jogo.batch, "Ângulo: " + String.format("%.2f", Math.toDegrees(Math.atan2(aceleracao.y, aceleracao.x))),0, 30);
+	    jogo.fonte.draw(jogo.batch, "Força: " + String.format("%.2f", Math.sqrt(aceleracao.y * aceleracao.y + aceleracao.x * aceleracao.x)),0, 60);
 	}
 	
 	public void desenhar (float delta) 
@@ -210,31 +228,27 @@ public class TelaJogo extends ScreenAdapter
         jogo.batch.setProjectionMatrix(camera.combined);
         jogo.batch.begin();
         jogo.batch.draw(Assets.fundoJogo, 0, 160, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
-        jogo.fonte.draw(jogo.batch, "Chances: " + chances,Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
+        //jogo.fonte.draw(jogo.batch, "Chances: " + mundo.logica_do_jogo.getChances(),Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
         btnSom.desenhar(jogo.batch);
         btnMusica.desenhar(jogo.batch);
         btnSair.desenhar(jogo.batch);
         jogo.batch.draw(Assets.gramado, 0, 0, Assets.TELA_LARGURA, 200);
         desenhar_anim_grama(delta,40,10,4);
-        jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.05f-10,Assets.TELA_ALTURA * 0.1f-10,120,40);
-        jogo.batch.draw(Assets.estilingue_tras, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f);
-        jogo.batch.draw(Assets.estilingue_frente, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f + 130 - 57);
-        /*
-        jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.9f - 75,Assets.TELA_ALTURA * 0.1f-10,140,40);
-        jogo.batch.draw(Assets.lixeira_vermelha, Assets.TELA_LARGURA * 0.9f - 50, Assets.TELA_ALTURA * 0.1f);
-        jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.78f - 75,Assets.TELA_ALTURA * 0.1f-10,140,40);
-        jogo.batch.draw(Assets.lixeira_verde, Assets.TELA_LARGURA * 0.78f - 50, Assets.TELA_ALTURA * 0.1f);
-        jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.66f - 75,Assets.TELA_ALTURA * 0.1f-10,140,40);
-        jogo.batch.draw(Assets.lixeira_azul, Assets.TELA_LARGURA * 0.66f - 50, Assets.TELA_ALTURA * 0.1f);
-        jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.54f - 75,Assets.TELA_ALTURA * 0.1f-10,140,40);
-        jogo.batch.draw(Assets.lixeira_amarela, Assets.TELA_LARGURA * 0.54f - 50, Assets.TELA_ALTURA * 0.1f);
-        */
+        desenhar_estilingue();
+        mundo.desenhar(jogo.batch);
         desenhar_projeteis(delta);
         desenhar_anim_grama(delta,-20,10,2);
-        //for (int k=0; k<2; k++)
-        //    for (int j=0; j<10; j++)
-        //        jogo.batch.draw(Assets.grama.getKeyFrame((tempo_delta+j+k*3),true),-50+j*70+k*10,-20+30*k,80,80);
+        desenhar_textos();
         jogo.batch.end();
+        desenhador.setColor(1,1,1,1);
+        desenhador.setProjectionMatrix(camera.combined);
+        Gdx.gl.glLineWidth(5);
+        desenhador.begin(ShapeType.Line);
+        desenhador.line(aceleracao.x * 10 + Assets.TELA_LARGURA * 0.125f, 
+                        aceleracao.y * 10 + Assets.TELA_ALTURA * 0.3f,
+                        Assets.TELA_LARGURA * 0.125f,
+                        Assets.TELA_ALTURA * 0.3f);
+        desenhador.end();
 	}
 	
 	@Override
