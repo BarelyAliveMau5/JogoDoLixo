@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.lixo.Projetil.Tipo;
+import com.lixo.Projetil.TipoProjetil;
 
 
 public class TelaJogo extends ScreenAdapter
@@ -27,12 +27,11 @@ public class TelaJogo extends ScreenAdapter
 	Vector3 areaDoClick;
 	Mundo mundo;
 	float tempo_delta;
-	private static ShapeRenderer desenhador = new ShapeRenderer();
 	
 	//somente usado em testes
 	Array<Projetil> projeteis;
 	Vector2 aceleracao;
-	Tipo teste_tipo;
+	TipoProjetil teste_tipo;
 	
 	public TelaJogo(Lixo jogo)
 	{
@@ -49,45 +48,46 @@ public class TelaJogo extends ScreenAdapter
 		//somente usado em testes
 		projeteis = new Array<Projetil>();
 		aceleracao = new Vector2(4f,7f);
-		teste_tipo = Tipo.METAL;
+		teste_tipo = TipoProjetil.METAL;
 	}
 	
-	//somente usado pra testes
+	//somente usado pra testes 
+	/*
 	public void testes_debug()
 	{
 	    //opções para debugging. divirta-se vendo o iphone ser lançado no lixo
-        if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            aceleracao.x += 0.1f;
-            System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
+        if(Gdx.input.isKeyPressed(Keys.D)) {
+            mundo.aceleracao.x += 0.1f;
+            System.out.println("accel:x=" + mundo.aceleracao.x +", y=" + mundo.aceleracao.y);
         }
         
-        if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-            aceleracao.x -= 0.1f;
-            System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
+        if(Gdx.input.isKeyPressed(Keys.A)) {
+            mundo.aceleracao.x -= 0.1f;
+            System.out.println("accel:x=" + mundo.aceleracao.x +", y=" + mundo.aceleracao.y);
         }
         
-        if(Gdx.input.isKeyPressed(Keys.DOWN)){
-            aceleracao.y -= 0.1f;
-            System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
+        if(Gdx.input.isKeyPressed(Keys.S)){
+            mundo.aceleracao.y -= 0.1f;
+            System.out.println("accel:x=" + mundo.aceleracao.x +", y=" + mundo.aceleracao.y);
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.NUM_1)){
-            teste_tipo = Tipo.VIDRO;
+            teste_tipo = TipoProjetil.VIDRO;
             System.out.println("tipo = vidro");
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.NUM_2)){
-            teste_tipo = Tipo.PLASTICO;
+            teste_tipo = TipoProjetil.PLASTICO;
             System.out.println("tipo = plastico");
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.NUM_3)){
-            teste_tipo = Tipo.PAPEL;
+            teste_tipo = TipoProjetil.PAPEL;
             System.out.println("tipo = papel");
         }
         
         if(Gdx.input.isKeyJustPressed(Keys.NUM_4)){
-            teste_tipo = Tipo.METAL;
+            teste_tipo = TipoProjetil.METAL;
             System.out.println("tipo = metal");
         }
         
@@ -111,14 +111,14 @@ public class TelaJogo extends ScreenAdapter
             System.out.println("+gravidade X:" + Mundo.gravidade.toString());
         }
         
-        if(Gdx.input.isKeyPressed(Keys.D)){
+        if(Gdx.input.isKeyPressed(Keys.E)){
             if (projeteis.size > 0){
                 System.out.println("deletado idx " + projeteis.size);
                 projeteis.removeIndex(0);
             }
         }
         
-        if(Gdx.input.isKeyPressed(Keys.A)){
+        if(Gdx.input.isKeyPressed(Keys.Q)){
             if (projeteis.size > 0){
                 System.out.println("deletado tudo: " + projeteis.size);
                 projeteis.clear();
@@ -135,27 +135,35 @@ public class TelaJogo extends ScreenAdapter
             System.out.println("Java heap:\t" + (Gdx.app.getJavaHeap()/1024) + "K");
         }
         
-        if(Gdx.input.isKeyPressed(Keys.UP)){
-            aceleracao.y += 0.1f;
-            System.out.println("accel:x=" + aceleracao.x +", y=" + aceleracao.y);
+        if(Gdx.input.isKeyPressed(Keys.W)){
+            mundo.aceleracao.y += 0.1f;
+            System.out.println("accel:x=" + mundo.aceleracao.x +", y=" + mundo.aceleracao.y);
         }
-        if(Gdx.input.justTouched() || Gdx.input.isKeyPressed(Keys.SPACE)) {
+        if(Gdx.input.justTouched() || Gdx.input.isKeyPressed(Keys.COMMA)) {
             camera.unproject(areaDoClick.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             Projetil teste = new Projetil(teste_tipo, 0, 0);
             teste.velocidade.x = 0;
             teste.velocidade.y = 0;
             teste.posicao.x = areaDoClick.x;
             teste.posicao.y = areaDoClick.y;
-            teste.lancar(aceleracao);
+            teste.lancar(mundo.aceleracao);
             projeteis.add(teste);
         }
 	}
-	
-	
+	*/
+	/*
+	void desenhar_projeteis(float delta)
+    {   
+        for(Projetil projetil : projeteis)
+            projetil.desenhar(jogo.batch, delta);
+        
+    } 
+	 */
+
 	public void atualizar()
 	{
 	    //somente usado em testes
-	    mundo.checarLimites(projeteis);
+	    //mundo.checarLimites(projeteis);
 	    mundo.atualizar();
 	    if(Gdx.input.justTouched()) 
         {
@@ -182,19 +190,35 @@ public class TelaJogo extends ScreenAdapter
                 return;
             }
         }
+	    if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+	        //mundo.aceleracao.x += 0.1f;
+	        mundo.lancarProjetil();
+	    }
+	    
+	    if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            //mundo.aceleracao.x += 0.1f;
+            mundo.setAngulo(true);
+	    }
+            
+        if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+            //mundo.aceleracao.x -= 0.1f;
+            mundo.setAngulo(false);
+        }
+           
+        if(Gdx.input.isKeyPressed(Keys.DOWN)){
+            //mundo.aceleracao.y -= 0.1f;
+            mundo.setForca(false);
+        }
+           
+        if(Gdx.input.isKeyPressed(Keys.UP)){
+            //mundo.aceleracao.y += 0.1f;
+            mundo.setForca(true);
+        }
+          
 	    //somente usado em testes
-	    testes_debug();
+	    //testes_debug();
 	}
 	
-	
-	void desenhar_projeteis(float delta)
-	{
-	    //somente usado em testes
-	    ///*
-	    for(Projetil projetil : projeteis)
-            projetil.desenhar(jogo.batch, delta);
-        //*/
-	}
 	
 	void desenhar_anim_grama(float delta, int y, int w, int h)
 	{
@@ -207,16 +231,19 @@ public class TelaJogo extends ScreenAdapter
 	{
 	    jogo.batch.draw(Assets.sombra, Assets.TELA_LARGURA * 0.05f-10,Assets.TELA_ALTURA * 0.1f-10,120,40);
         jogo.batch.draw(Assets.estilingue_tras, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f);
-        jogo.batch.draw(Assets.estilingue_frente, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f + 130 - 57);
-        
+    }
+	
+	void desenhar_estilingue_frente()
+	{
+	    jogo.batch.draw(Assets.estilingue_frente, Assets.TELA_LARGURA * 0.05f, Assets.TELA_ALTURA * 0.1f + 130 - 57);
 	}
 	
 	void desenhar_textos()
 	{
 	    jogo.fonte.draw(jogo.batch, "Chances: " + mundo.logica_do_jogo.getChances(),Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
 	    jogo.fonte.draw(jogo.batch, "Restante: " + (mundo.logica_do_jogo.getRestante() + 1) ,Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 30);
-	    jogo.fonte.draw(jogo.batch, "Ângulo: " + String.format("%.2f", Math.toDegrees(Math.atan2(aceleracao.y, aceleracao.x))),0, 30);
-	    jogo.fonte.draw(jogo.batch, "Força: " + String.format("%.2f", Math.sqrt(aceleracao.y * aceleracao.y + aceleracao.x * aceleracao.x)),0, 60);
+	    jogo.fonte.draw(jogo.batch, "Ângulo: " + String.format("%.2f", mundo.getAngulo()),0, 30);
+	    jogo.fonte.draw(jogo.batch, "Força: " + String.format("%.2f", mundo.getForca()),0, 60);
 	}
 	
 	public void desenhar (float delta) 
@@ -228,7 +255,6 @@ public class TelaJogo extends ScreenAdapter
         jogo.batch.setProjectionMatrix(camera.combined);
         jogo.batch.begin();
         jogo.batch.draw(Assets.fundoJogo, 0, 160, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
-        //jogo.fonte.draw(jogo.batch, "Chances: " + mundo.logica_do_jogo.getChances(),Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
         btnSom.desenhar(jogo.batch);
         btnMusica.desenhar(jogo.batch);
         btnSair.desenhar(jogo.batch);
@@ -236,19 +262,11 @@ public class TelaJogo extends ScreenAdapter
         desenhar_anim_grama(delta,40,10,4);
         desenhar_estilingue();
         mundo.desenhar(jogo.batch);
-        desenhar_projeteis(delta);
+        //desenhar_projeteis(delta);
+        desenhar_estilingue_frente();
         desenhar_anim_grama(delta,-20,10,2);
         desenhar_textos();
         jogo.batch.end();
-        desenhador.setColor(1,1,1,1);
-        desenhador.setProjectionMatrix(camera.combined);
-        Gdx.gl.glLineWidth(5);
-        desenhador.begin(ShapeType.Line);
-        desenhador.line(aceleracao.x * 10 + Assets.TELA_LARGURA * 0.125f, 
-                        aceleracao.y * 10 + Assets.TELA_ALTURA * 0.3f,
-                        Assets.TELA_LARGURA * 0.125f,
-                        Assets.TELA_ALTURA * 0.3f);
-        desenhador.end();
 	}
 	
 	@Override

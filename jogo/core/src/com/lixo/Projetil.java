@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Projetil
 {
-    public static enum Tipo
+    public static enum TipoProjetil
     {
         PLASTICO,
         VIDRO,
@@ -22,9 +22,9 @@ public class Projetil
     boolean ativo;
     public Rectangle area;
     public float rotacao;
-    public Tipo tipo;
+    public TipoProjetil tipo;
     
-    public Projetil(Tipo tipo, float x, float y)
+    public Projetil(TipoProjetil tipo, float x, float y)
     {
         this.posicao = new Vector2(x, y);
         this.tipo = tipo;
@@ -35,7 +35,7 @@ public class Projetil
         area = new Rectangle(x, y, 32f, 48f);
     }
     
-    TextureRegion getTipoSprite(Tipo tipo)
+    TextureRegion getTipoSprite(TipoProjetil tipo)
     {
         switch (tipo)
         {
@@ -80,7 +80,7 @@ public class Projetil
     
     public void desenhar(Batch batch, float delta)
     {
-        if (tipo == Tipo.INVISIVEL) 
+        if (tipo == TipoProjetil.INVISIVEL) 
             return;
         atualizar(delta);
         if (!ativo)
@@ -97,7 +97,7 @@ public class Projetil
     
     public void desaparecer()
     {
-        tipo = Tipo.INVISIVEL;
+        tipo = TipoProjetil.INVISIVEL;
     }
     
     public void desativar()

@@ -30,6 +30,8 @@ public class Assets
     public static TextureRegion metal_iphone;
     public static TextureRegion papel_aps;
     public static TextureRegion sombra;
+    public static TextureRegion seta_ponta;
+    public static TextureRegion borracha;
     public static Texture gramado;
     public static Texture sprites;
     public static Texture fundoMenuPrincipal;
@@ -71,6 +73,8 @@ public class Assets
         som_lixo= Gdx.audio.newSound(Gdx.files.internal("trash.ogg"));
         som_soco= Gdx.audio.newSound(Gdx.files.internal("punch.ogg"));
         sprites = carregarTextura("sprites.png");
+        seta_ponta = new TextureRegion(sprites, 308, 120, 16, 16);
+        borracha = new TextureRegion(sprites, 324, 120, 8, 8);
         lixeira_vermelha = new TextureRegion(sprites, 0, 0, 80, 100);
         lixeira_verde = new TextureRegion(sprites, 80, 0, 80, 100);
         lixeira_amarela = new TextureRegion(sprites, 160, 0, 80, 100);

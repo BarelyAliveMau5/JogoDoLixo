@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.lixo.Projetil.Tipo;
+import com.lixo.Projetil.TipoProjetil;
 
 public class Lixeira
 {
@@ -34,7 +34,7 @@ public class Lixeira
         boca = new Rectangle(pos.x-10, pos.y+50, 58, 24);
     }
     
-    public TipoContato testarContatoLixo(Vector2 posicao, Tipo tipo)
+    public TipoContato testarContatoLixo(Vector2 posicao, TipoProjetil tipo)
     {
         if (boca.contains(posicao))
         {
