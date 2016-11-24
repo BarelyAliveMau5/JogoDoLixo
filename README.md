@@ -1,9 +1,23 @@
 # Jogo do lixo
+
 ## Executando o jogo
-A versão mais atualizada: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
+
+A versão mais atualizada do arquivo: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
+
+### No windows:
+
+Dê um clique duplo encima do arquivo, ele deve abrir.
+
+
+### No linux:
+
+`$java -jar  jogo/desktop/build/libs/desktop-1.0.jar`
+
 
 ## Compilando e rodando o jogo
+
 ### No windows:
+
 1. Abra uma janela de console usando o caminho onde o arquivo gradlew.bat está localizado (na pasta: Shift+Click direito -> Abrir janela de comando - se tiver preguiça como eu);
 2. Defina a variável JAVA_HOME apontando para a pasta onde o jdk está instalado, caso não exista 
   * de forma genérica mas sem garantia que funcione (dependendo da versão da sua jdk, idiota do sistema, etc..., isso provavelmente não irá ajudar): `set JAVA_HOME=C:\Arquivos de Programas\Java && set PATH=%PATH%;%JAVA_HOME%\jdk1.8.0_60`;
@@ -16,6 +30,8 @@ A versão mais atualizada: [jogo/desktop/build/libs/desktop-1.0.jar](https://git
 4. Se tudo deu certo, para rodar o jogo execute o comando `gradlew.bat run` e pra compilar o jar execute `gradlew.bat desktop:dist`;
 5. Se quiser ver as operações que podem ser feitas execute o comando `gradlew.bat tasks`.
 
+
 ### No linux:
+
 1. Execute o script gradlew para rodar o jogo `gradlew run` e para compilar o jar `gradlew desktop:dist`.
   * Se foi eu quem disse, é porque deu certo. Se você realmente usa um pc com linux, provavelmente vai saber resolver os problemas que aparecerem.
