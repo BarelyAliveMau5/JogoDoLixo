@@ -16,5 +16,5 @@ A versão mais atualizada: [jogo/desktop/build/libs/desktop-1.0.jar](https://git
 5. Se quiser ver as operações que podem ser feitas execute o comando `gradlew.bat tasks`.
 
 ### No linux:
-1. Execute o script gradlew.
-  * Se foi eu quem disse, é porque deu certo. Se você realmente use um pc com linux, provavelmente vai saber resolver os problemas que aparecerem.
+1. Execute o script gradlew para rodar o jogo `gradlew run` e para compilar o jar `gradlew desktop:dist`.
+  * Se foi eu quem disse, é porque deu certo. Se você realmente usa um pc com linux, provavelmente vai saber resolver os problemas que aparecerem.
