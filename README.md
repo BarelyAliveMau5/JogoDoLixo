@@ -1,8 +1,8 @@
 # Jogo do lixo
 ## Executando o jogo
-A Versão mais atualizada: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
+A versão mais atualizada: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
 
-## Compilando o jogo
+## Compilando e rodando o jogo
 ### No windows:
 1. Defina a variável JAVA_HOME apontando para a pasta onde o jdk está instalado, caso não exista;
 2. Abra uma janela de console usando o caminho onde o arquivo gradlew.bat está localizado (na pasta: Shift+Click direito -> Abrir janela de comando - se tiver preguiça como eu);
