@@ -241,7 +241,7 @@ public class TelaJogo extends ScreenAdapter
 	void desenhar_textos()
 	{
 	    jogo.fonte.draw(jogo.batch, "Chances: " + mundo.logica_do_jogo.getChances(),Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 5);
-	    jogo.fonte.draw(jogo.batch, "Restante: " + (mundo.logica_do_jogo.getRestante() + 1) ,Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 30);
+	    jogo.fonte.draw(jogo.batch, "Restante: " + (mundo.logica_do_jogo.getRestante()) ,Assets.TELA_LARGURA / 2 -50,Assets.TELA_ALTURA - 30);
 	    jogo.fonte.draw(jogo.batch, "Ângulo: " + String.format("%.2f", mundo.getAngulo()),0, 30);
 	    jogo.fonte.draw(jogo.batch, "Força: " + String.format("%.2f", mundo.getForca()),0, 60);
 	}

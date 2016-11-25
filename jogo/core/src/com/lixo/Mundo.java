@@ -172,7 +172,7 @@ public class Mundo
         checarLimites(projeteis);
         proximoLancePossivel();
         if(logica_do_jogo.estado != EstadoJogo.JOGANDO)
-            jogo.setScreen(new Fim(jogo, logica_do_jogo.estado));
+            jogo.setScreen(new Fim(jogo, logica_do_jogo.estado, logica_do_jogo.getChances()+5));
     }
     
     public void desenhar(Batch batch)

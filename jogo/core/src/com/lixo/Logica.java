@@ -28,7 +28,7 @@ public class Logica
         tipos_de_lixos = new Array<TipoProjetil>();
         criar_projeteis();
         contador = 0;
-        restante = 4;
+        restante = 5;
         chances = TOTAL_CHANCES;
         estado = EstadoJogo.JOGANDO;
         atual = tipos_de_lixos.get(0);

@@ -12,15 +12,16 @@ public class Fim extends ScreenAdapter
     Lixo jogo;
     String msg;
     
-    public Fim(Lixo jogo, EstadoJogo resultado)
+    public Fim(Lixo jogo, EstadoJogo resultado, int tentativas)
     {
         this.jogo = jogo;
         camera = new OrthographicCamera(Assets.TELA_LARGURA, Assets.TELA_ALTURA);
         camera.position.set(Assets.TELA_LARGURA / 2, Assets.TELA_ALTURA / 2, 0);
         if (resultado == EstadoJogo.PERDEU)
-            this.msg = "Você perdeu!";
+            this.msg = "   Você perdeu!";
         else
-            this.msg = "Você venceu!";
+            this.msg = "   Você venceu!";
+        this.msg += "\ncom " + tentativas + " tentativas.";
     }
     
     void atualizar()
@@ -40,7 +41,7 @@ public class Fim extends ScreenAdapter
         camera.update();
         jogo.batch.begin();
         jogo.batch.draw(Assets.fundoMenuPrincipal, 0, 0, Assets.TELA_LARGURA, Assets.TELA_ALTURA);
-        jogo.fonte.draw(jogo.batch, msg, Assets.TELA_LARGURA / 2 -80, Assets.TELA_ALTURA / 2 + 20);
+        jogo.fonte.draw(jogo.batch, msg, Assets.TELA_LARGURA / 2 -110, Assets.TELA_ALTURA / 2 + 20);
         jogo.batch.end();
         atualizar();
     }
