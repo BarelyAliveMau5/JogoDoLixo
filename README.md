@@ -1,5 +1,7 @@
 # Jogo do lixo
 
+![jogo](http://i.imgur.com/OUroKct.png)
+
 ## Executando o jogo
 
 A versão mais atualizada do arquivo: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
