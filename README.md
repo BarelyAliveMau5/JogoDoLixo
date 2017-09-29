@@ -1,19 +1,22 @@
 # Jogo do lixo
+## Descrição
+
+O objetivo deste jogo é acertar cada tipo de lixo na lixeira correta com uma quantidade limitada de erros.
 
 ![jogo](http://i.imgur.com/OUroKct.png)
 
 ## Executando o jogo
 
-A versão mais atualizada do arquivo: [jogo/desktop/build/libs/desktop-1.0.jar](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar)
+Baixe a versão mais atualizada do executável do jogo [aqui](https://github.com/BarelyAliveMau5/JogoDoLixo/blob/master/jogo/desktop/build/libs/desktop-1.0.jar) e execute de acordo com seu sistema (leia abaixo)
 
 ### No windows:
 
-Dê um clique duplo encima do arquivo, ele deve abrir.
+Dê um clique duplo encima do arquivo, ele deve abrir (é necessário [instalar](https://www.java.com/en/download/) o java caso não funcione).
 
 
 ### No linux:
 
-`$java -jar  jogo/desktop/build/libs/desktop-1.0.jar`
+`java -jar  jogo/desktop/build/libs/desktop-1.0.jar`
 
 
 ## Compilando e rodando o jogo
@@ -35,5 +38,4 @@ Dê um clique duplo encima do arquivo, ele deve abrir.
 
 ### No linux:
 
-1. Execute o script gradlew para rodar o jogo `gradlew run` e para compilar o jar `gradlew desktop:dist`.
-  * Se foi eu quem disse, é porque deu certo. Se você realmente usa um pc com linux, provavelmente vai saber resolver os problemas que aparecerem.
+1. Execute o script `gradlew`, para rodar o jogo use `gradlew run` e para compilar o jar use `gradlew desktop:dist`.
